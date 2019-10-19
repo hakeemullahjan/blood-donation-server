@@ -11,6 +11,7 @@ router.post('/', async (req, res) => {
         return res.status(409).json({ message: 'No user found' })
     }
 
+
     if (password !== user.password) {
         return res.status(409).json({ message: "Invalid password" })
     }
