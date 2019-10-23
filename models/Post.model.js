@@ -2,6 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
+    email: {
+        type: String
+    },
+    fullName: {
+        type: String
+    },
     bloodGroup: {
         type: String
     },
@@ -27,6 +33,14 @@ const PostSchema = new Schema({
         type: String
     },
     instructions: {
+        type: String,
+        trim: true
+    },
+    createdAt: {
+        type: Number,
+        // default: Date.now()
+    },
+    relation: {
         type: String
     }
 })

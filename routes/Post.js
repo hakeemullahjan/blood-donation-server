@@ -16,8 +16,9 @@ router.post('/bloodrequirement', (req, res) => {
         })
 })
 
+
 router.get('/getall', async (req, res) => {
-    const posts = await Posts.find()
+    const posts = await Posts.find().sort({ _id: -1 })
 
     if (!posts) {
         return res.status(409).json({ message: "NO POSTS YET" })

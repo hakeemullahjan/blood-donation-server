@@ -4,6 +4,8 @@ const db = require('./config/db');
 var cors = require('cors')
 
 app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 db.connection.once('open', () => {
     console.log('db connected');
@@ -16,7 +18,5 @@ app.listen(process.env.PORT || 3000, function () {
     console.log('server is listening')
 })
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.use('/', require('./routes/index.js'))
