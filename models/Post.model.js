@@ -38,11 +38,22 @@ const PostSchema = new Schema({
     },
     createdAt: {
         type: Number,
-        // default: Date.now()
+        // default: Date.now()//getting from client
     },
     relation: {
         type: String
+    },
+    status: {
+        type: String,
+        default: 'Not fulfilled'
+    },
+    volunteers: {
+        type: Array
+    },
+    comments: {
+        type: Array
     }
+
 })
 
 const Posts = mongoose.model('Posts', PostSchema)
