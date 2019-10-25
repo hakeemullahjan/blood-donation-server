@@ -12,7 +12,7 @@ const PostSchema = new Schema({
         type: String
     },
     units: {
-        type: String
+        type: Number
     },
     urgency: {
         type: String
@@ -38,7 +38,7 @@ const PostSchema = new Schema({
     },
     createdAt: {
         type: Number,
-        // default: Date.now()//getting from client
+        // default: Date.now() //getting from client
     },
     relation: {
         type: String
@@ -48,10 +48,18 @@ const PostSchema = new Schema({
         default: 'Not fulfilled'
     },
     volunteers: {
-        type: Array
+        type: Object
     },
     comments: {
         type: Array
+    },
+    recieved: {
+        type: Number,
+        default: 0
+    },
+    required: {
+        type: Number,
+
     }
 
 })
