@@ -12,7 +12,7 @@ const PostSchema = new Schema({
         type: String
     },
     units: {
-        type: Number
+        type: String
     },
     urgency: {
         type: String
@@ -63,6 +63,7 @@ const PostSchema = new Schema({
     }
 
 })
+
 
 const Posts = mongoose.model('Posts', PostSchema)
 module.exports = Posts

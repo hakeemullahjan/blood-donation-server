@@ -69,7 +69,7 @@ router.post('/addvolunteer/:postId', async (req, res) => {
         createdAt
     }
 
-    Posts.updateOne({ _id: ObjectId(postId) }, {
+    await Posts.updateOne({ _id: ObjectId(postId) }, {
         $push: { volunteers: addVolunteer }
     }, function (err, result) {
         if (err) {
@@ -96,9 +96,28 @@ router.get('/getmyposts/:email', async (req, res) => {
 })
 
 
-router.post('/donated:postId', (req, res) => {
+router.post('/donated/:postId/:volunteerId', async (req, res) => {
+    // const { user, post, volunteer } = req.body
+    const postId = req.params.postId
+    const volunteerId = req.params.volunteerId
 
-    // Posts.up
+    await Posts.updateMany({
+        _id: ObjectId(postId), 'volunteers._id': ObjectId(volunteerId)
+    }, { $inc: { 'recieved': 0.5, 'required': -0.5 } },
+        { $set: { 'volunteers.$.status': "Donated" } },
+        async function (err, result) {
+            if (err) {
+                res.status(500).json({ error: err })
+            } else {
+                // const post = await Posts.find({ $and: [{ _id: ObjectId(postId) }, { 'volunteers.status': 'Donated' }] })
+                // res.send(post) 
+                // const post = await Posts.updateOne({ _id: ObjectId(postId) }, { $set:{recieved:}})
+                res.status(200).json({ message: 'SUCCESSFULLY DONATED' })
+            }
+        })
+
+
+
 
 })
 
