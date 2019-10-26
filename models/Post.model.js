@@ -51,7 +51,7 @@ const PostSchema = new Schema({
         type: Object
     },
     comments: {
-        type: Array
+        type: Object
     },
     recieved: {
         type: Number,
