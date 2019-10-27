@@ -13,6 +13,7 @@ router.post("/signup", (req, res) => {
             res.send(result)
         })
         .catch(err => {
+            console.log('login error ----->', err)
             if (err.code === 11000) {
                 res.send({ message: 'USER ALREADY EXISTS' })
             } else {

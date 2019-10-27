@@ -12,6 +12,7 @@ router.post('/bloodrequirement', (req, res) => {
     newPost.save()
         .then(result => {
             res.send(result)
+            console.log(result)
         }).catch(err => {
             res.send({ message: err })
         })
