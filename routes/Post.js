@@ -155,14 +155,39 @@ router.post('/notdonated/:postId/:volunteerId', async (req, res) => {
     await Posts.updateOne({
         _id: ObjectId(postId), 'volunteers._id': ObjectId(volunteerId)
     }, { $set: { 'volunteers.$.status': "Not Donated" } },
-        { $inc: { 'recieved': -0.5, 'required': 0.5 } },
+        { $inc: { 'recieved': 0.5, 'required': -0.5 } },
         async function (err, result) {
             if (err) {
                 res.status(500).json({ error: err })
             } else {
-                res.status(200).json({ message: 'SUCCESSFULLY NOT DONATED' })
+
+                Posts.updateOne({
+                    _id: ObjectId(postId), 'volunteers._id': ObjectId(volunteerId)
+                }, { $inc: { 'recieved': -1, 'required': 1 } },
+                    async function (err, result) {
+                        if (err) {
+                            res.status(500).json({ error: err })
+                        } else {
+
+                            res.status(200).json({ message: 'SUCCESSFULLY NOT DONATED' })
+                        }
+                    })
+
             }
         })
+})
+
+router.post('/tick/:postId', async (req, res) => {
+    const postId = req.params.postId
+
+    await Posts.updateOne({ _id: ObjectId(postId) }, { $set: { 'status': 'Completed' } }, function (err, result) {
+        if (err) {
+            res.status(500).json({ error: err })
+        } else {
+            res.status(200).json({ message: 'STATUS COMPLETED SUCCESSFULLY' })
+        }
+    })
+
 })
 
 
